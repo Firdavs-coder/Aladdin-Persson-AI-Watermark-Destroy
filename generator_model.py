@@ -98,7 +98,7 @@ class Generator(nn.Module):
         d5 = self.down2(d4)
         residuals = self.residuals(d5) + d5
         up1 = self.up1(F.interpolate(residuals, scale_factor=2, mode="nearest"))
-        up2 = self.up1(F.interpolate(torch.cat([up1, d4], dim=1), scale_factor=2, mode="nearest"))
-        up3 = self.up1(F.interpolate(torch.cat([up2, d3], dim=1), scale_factor=2, mode="nearest"))
-        up4 = self.up1(F.interpolate(torch.cat([up3, d2], dim=1), scale_factor=2, mode="nearest"))
+        up2 = self.up2(F.interpolate(torch.cat([up1, d4], dim=1), scale_factor=2, mode="nearest"))
+        up3 = self.up3(F.interpolate(torch.cat([up2, d3], dim=1), scale_factor=2, mode="nearest"))
+        up4 = self.up4(F.interpolate(torch.cat([up3, d2], dim=1), scale_factor=2, mode="nearest"))
         return self.final_conv(torch.cat([up4, d1], dim=1))
