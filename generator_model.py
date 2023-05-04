@@ -81,7 +81,7 @@ class Generator(nn.Module):
         self.down4 = Block(features*8, features*16, act="relu")
         self.residuals = nn.Sequential(*[ResidualBlock(features*16) for _ in range(num_residuals)])
         self.up1 = Block(features*16, features*8, stride=1, act="relu")
-        self.ip2 = Block(features*8*2, features*4, stride=1,act="relu")
+        self.up2 = Block(features*8*2, features*4, stride=1,act="relu")
         self.up3 = Block(features*4*2, features*2, stride=1,act="relu")
         self.up4 = Block(features*2*2, features, stride=1,act="relu")
         self.final_conv = nn.Sequential(
